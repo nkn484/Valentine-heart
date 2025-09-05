@@ -3,7 +3,7 @@ var canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-var gl = canvas.getContext('webgl');
+var gl = canvas.getContext("webgl");
 if (!gl) {
   console.error("Unable to initialize WebGL.");
 }
@@ -166,7 +166,7 @@ void main(){
 }
 `;
 
-window.addEventListener('resize', onWindowResize, false);
+window.addEventListener("resize", onWindowResize, false);
 
 function onWindowResize() {
   canvas.width = window.innerWidth;
@@ -175,8 +175,6 @@ function onWindowResize() {
   gl.uniform1f(widthHandle, window.innerWidth);
   gl.uniform1f(heightHandle, window.innerHeight);
 }
-
-
 
 function compileShader(shaderSource, shaderType) {
   var shader = gl.createShader(shaderType);
@@ -191,7 +189,7 @@ function compileShader(shaderSource, shaderType) {
 function getAttribLocation(program, name) {
   var attributeLocation = gl.getAttribLocation(program, name);
   if (attributeLocation === -1) {
-    throw 'Cannot find attribute ' + name + '.';
+    throw "Cannot find attribute " + name + ".";
   }
   return attributeLocation;
 }
@@ -199,14 +197,13 @@ function getAttribLocation(program, name) {
 function getUniformLocation(program, name) {
   var attributeLocation = gl.getUniformLocation(program, name);
   if (attributeLocation === -1) {
-    throw 'Cannot find uniform ' + name + '.';
+    throw "Cannot find uniform " + name + ".";
   }
   return attributeLocation;
 }
 
 var vertexShader = compileShader(vertexSource, gl.VERTEX_SHADER);
 var fragmentShader = compileShader(fragmentSource, gl.FRAGMENT_SHADER);
-
 
 var program = gl.createProgram();
 gl.attachShader(program, vertexShader);
@@ -215,28 +212,17 @@ gl.linkProgram(program);
 
 gl.useProgram(program);
 
-var vertexData = new Float32Array([
-  -1.0, 1.0,
-  -1.0, -1.0,
-  1.0, 1.0,
-  1.0, -1.0,
-]);
+var vertexData = new Float32Array([-1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0, -1.0]);
 var vertexDataBuffer = gl.createBuffer();
 gl.bindBuffer(gl.ARRAY_BUFFER, vertexDataBuffer);
 gl.bufferData(gl.ARRAY_BUFFER, vertexData, gl.STATIC_DRAW);
-var positionHandle = getAttribLocation(program, 'position');
+var positionHandle = getAttribLocation(program, "position");
 
 gl.enableVertexAttribArray(positionHandle);
-gl.vertexAttribPointer(positionHandle,
-  2,
-  gl.FLOAT,
-  false,
-  2 * 4,
-  0
-);
-var timeHandle = getUniformLocation(program, 'time');
-var widthHandle = getUniformLocation(program, 'width');
-var heightHandle = getUniformLocation(program, 'height');
+gl.vertexAttribPointer(positionHandle, 2, gl.FLOAT, false, 2 * 4, 0);
+var timeHandle = getUniformLocation(program, "time");
+var widthHandle = getUniformLocation(program, "width");
+var heightHandle = getUniformLocation(program, "height");
 
 gl.uniform1f(widthHandle, window.innerWidth);
 gl.uniform1f(heightHandle, window.innerHeight);
@@ -245,7 +231,6 @@ var lastFrame = Date.now();
 var thisFrame;
 
 function draw() {
-
   thisFrame = Date.now();
   time += (thisFrame - lastFrame) / 1000;
   lastFrame = thisFrame;
