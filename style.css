@@ -2,16 +2,53 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-y: hidden;
+}
+
+body {
+  background: #000;
+  overflow: hidden;
 }
 
 canvas {
   width: 100%;
   height: 100vh;
+  display: block;
+}
+
+.story-message {
+  position: fixed;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  width: min(56vw, 700px);
+  height: 32vh;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 12px;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.95);
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 2rem;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 10px rgba(255, 120, 170, 0.4), 0 0 30px rgba(255, 120, 170, 0.2);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.story-message.final {
+  top: 56%;
+  width: min(50vw, 620px);
+  height: 30vh;
+  color: #fff5f8;
+  text-shadow: 0 0 14px rgba(255, 130, 170, 0.9), 0 0 32px rgba(255, 120, 190, 0.7),
+    0 0 52px rgba(255, 110, 210, 0.45);
 }
 
 .MDJAminDiv {
-  z-index: 4444;
+  z-index: 30;
   position: fixed;
   bottom: 5%;
   left: 2%;
